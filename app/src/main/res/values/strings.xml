@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MLKitExample</string>
+    <string name="reconocer_texto">Reconocer texto</string>
+    <string name="escanear_codigo_de_barras">Escanear Codigo de barras</string>
+</resources>
