@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.jquiroga.mlkitexample.features.ScanBarcodeActivity
+import com.jquiroga.mlkitexample.utils.Utils
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -15,6 +16,13 @@ class MainActivity : AppCompatActivity() {
         btnBarCodeScanner.setOnClickListener {
             val intent = Intent(this, ScanBarcodeActivity::class.java)
             startActivity(intent)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (!Utils.allPermissionsGranted(this)) {
+            Utils.requestRuntimePermissions(this)
         }
     }
 }
