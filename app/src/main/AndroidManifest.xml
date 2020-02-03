@@ -2,10 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.jquiroga.mlkitexample">
 
-    <uses-feature android:name="android.hardware.camera"/>
+    <uses-feature android:name="android.hardware.camera" />
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -24,7 +24,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".features.ScanBarcodeActivity"/>
+        <activity android:name=".features.ScanBarcodeActivity" />
+
+        <activity android:name=".features.ScanBarcode2Activity"/>
 
     </application>
 

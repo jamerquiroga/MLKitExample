@@ -39,9 +39,11 @@ class ScanBarcodeActivity : AppCompatActivity(), View.OnClickListener {
         }
 
         findViewById<View>(R.id.close_button).setOnClickListener(this)
+
         flashButton = findViewById<View>(R.id.flash_button).apply {
             setOnClickListener(this@ScanBarcodeActivity)
         }
+
         settingsButton = findViewById<View>(R.id.settings_button).apply {
             setOnClickListener(this@ScanBarcodeActivity)
         }
@@ -91,7 +93,7 @@ class ScanBarcodeActivity : AppCompatActivity(), View.OnClickListener {
         val workflowModel = this.workflowModel ?: return
         if (workflowModel.isCameraLive) {
             workflowModel.markCameraFrozen()
-            flashButton?.isSelected = false
+            //flashButton?.isSelected = false
             preview?.stop()
         }
     }
@@ -101,7 +103,7 @@ class ScanBarcodeActivity : AppCompatActivity(), View.OnClickListener {
 
         // Observes the workflow state changes, if happens, update the overlay view indicators and
         // camera preview state.
-        workflowModel!!.workflowState.observe(this, Observer { workflowState ->
+        workflowModel!!.workflowState.observe(this, Observer { workflowState ->1
             if (workflowState == null || Objects.equal(currentWorkflowState, workflowState)) {
                 return@Observer
             }
