@@ -7,7 +7,7 @@ import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcode
 import com.jquiroga.mlkitexample.camera.GraphicOverlay
 import com.jquiroga.mlkitexample.settings.PreferenceUtils
 
-/** Guides user to move camera closer to confirm the detected barcode.  */
+/** Guía al usuario a acercar la cámara para confirmar el código de barras detectado.  */
 internal class BarcodeConfirmingGraphic(overlay: GraphicOverlay, private val barcode: FirebaseVisionBarcode) :
     BarcodeGraphicBase(overlay) {
 

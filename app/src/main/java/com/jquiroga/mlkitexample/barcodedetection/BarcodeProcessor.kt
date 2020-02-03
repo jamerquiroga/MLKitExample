@@ -16,7 +16,7 @@ import com.jquiroga.mlkitexample.camera.WorkflowModel
 import com.jquiroga.mlkitexample.settings.PreferenceUtils
 import java.io.IOException
 
-/** A processor to run the barcode detector.  */
+/** Un procesador para ejecutar el detector de código de barras.  */
 class BarcodeProcessor(graphicOverlay: GraphicOverlay, private val workflowModel: WorkflowModel) :
     FrameProcessorBase<List<FirebaseVisionBarcode>>() {
 

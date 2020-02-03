@@ -8,7 +8,7 @@ import android.graphics.Point
 import android.graphics.PointF
 import com.jquiroga.mlkitexample.camera.GraphicOverlay
 
-/** Draws the graphic to indicate the barcode result is in loading.  */
+/** Dibuja el gráfico para indicar que el resultado del código de barras se está cargando.  */
 internal class BarcodeLoadingGraphic(overlay: GraphicOverlay, private val loadingAnimator: ValueAnimator) :
     BarcodeGraphicBase(overlay) {
 

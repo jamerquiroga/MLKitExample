@@ -5,10 +5,11 @@ import android.hardware.Camera
 import com.google.android.gms.common.images.Size
 
 /**
- * Stores a preview size and a corresponding same-aspect-ratio picture size. To avoid distorted
- * preview images on some devices, the picture size must be set to a size that is the same aspect
- * ratio as the preview size or the preview may end up being distorted. If the picture size is null,
- * then there is no picture size with the same aspect ratio as the preview size.
+ * Almacena un tamaño de vista previa y un tamaño de imagen con la misma relación de aspecto correspondiente. Para
+ * evitar imágenes de vista previa distorsionadas en algunos dispositivos, el tamaño de la imagen debe establecerse
+ * en un tamaño que tenga la misma relación de aspecto que el tamaño de vista previa o la vista previa puede terminar
+ * distorsionada. Si el tamaño de la imagen es nulo, entonces no hay tamaño de imagen con la misma relación de
+ * aspecto que el tamaño de la vista previa.
  */
 class CameraSizePair {
     val preview: Size

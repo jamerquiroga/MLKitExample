@@ -12,7 +12,7 @@ import com.jquiroga.mlkitexample.R
 import com.jquiroga.mlkitexample.utils.Utils
 import java.io.IOException
 
-/** Preview the camera image in the screen.  */
+/** Vista previa de la imagen de la cámara en la pantalla.  */
 class CameraSourcePreview(context: Context, attrs: AttributeSet) : FrameLayout(context, attrs) {
 
     private val surfaceView: SurfaceView = SurfaceView(context).apply {

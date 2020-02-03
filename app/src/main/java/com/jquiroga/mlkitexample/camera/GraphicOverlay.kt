@@ -11,17 +11,17 @@ import com.jquiroga.mlkitexample.utils.Utils
 import java.util.ArrayList
 
 /**
- * A view which renders a series of custom graphics to be overlaid on top of an associated preview
- * (i.e., the camera preview). The creator can add graphics objects, update the objects, and remove
- * them, triggering the appropriate drawing and invalidation within the view.
  *
+ * Una vista que representa una serie de gráficos personalizados que se superponen sobre una vista
+ * previa asociada (es decir, la vista previa de la cámara). El creador puede agregar objetos gráficos,
+ * actualizar los objetos y eliminarlos, desencadenando el dibujo apropiado y la invalidación dentro de la vista.
  *
- * Supports scaling and mirroring of the graphics relative the camera's preview properties. The
- * idea is that detection items are expressed in terms of a preview size, but need to be scaled up
- * to the full view size, and also mirrored in the case of the front-facing camera.
+ * Admite la escala y la duplicación de los gráficos relativos a las propiedades de vista previa de la cámara.
+ * La idea es que los elementos de detección se expresen en términos de un tamaño de vista previa, pero deben
+ * ampliarse al tamaño de la vista completa, y también reflejarse en el caso de la cámara frontal.
  *
- *
- * Associated [Graphic] items should use [.translateX] and [ ][.translateY] to convert to view coordinate from the preview's coordinate.
+ * Associated [Graphic] los elementos deben usar [.translateX] y [ ] [. translateY] para convertir y ver la
+ * coordenada desde la vista previa de coordenadas.
  */
 class GraphicOverlay(context: Context, attrs: AttributeSet) : View(context, attrs) {
     private val lock = Any()

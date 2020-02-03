@@ -11,8 +11,8 @@ import com.jquiroga.mlkitexample.camera.CameraReticleAnimator
 import com.jquiroga.mlkitexample.camera.GraphicOverlay
 
 /**
- * A camera reticle that locates at the center of canvas to indicate the system is active but has
- * not detected a barcode yet.
+ * Una retícula de cámara que se ubica en el centro del lienzo para indicar que el sistema está
+ * activo pero que aún no ha detectado un código de barras.
  */
 internal class BarcodeReticleGraphic(overlay: GraphicOverlay, private val animator: CameraReticleAnimator) :
     BarcodeGraphicBase(overlay) {
