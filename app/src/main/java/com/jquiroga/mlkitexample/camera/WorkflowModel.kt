@@ -6,15 +6,12 @@ import androidx.annotation.MainThread
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcode
-import java.util.HashSet
 
 /** Vea el modelo para manejar el flujo de trabajo de la aplicación basado en la vista previa de la cámara. */
 class WorkflowModel(application: Application) : AndroidViewModel(application) {
 
     val workflowState = MutableLiveData<WorkflowState>()
     val detectedBarcode = MutableLiveData<FirebaseVisionBarcode>()
-
-    private val objectIdsToSearch = HashSet<Int>()
 
     var isCameraLive = false
         private set
@@ -26,9 +23,6 @@ class WorkflowModel(application: Application) : AndroidViewModel(application) {
         NOT_STARTED,
         DETECTING,
         DETECTED,
-        CONFIRMING,
-        SEARCHING,
-        SEARCHED
     }
 
     @MainThread
@@ -38,7 +32,6 @@ class WorkflowModel(application: Application) : AndroidViewModel(application) {
 
     fun markCameraLive() {
         isCameraLive = true
-        objectIdsToSearch.clear()
     }
 
     fun markCameraFrozen() {

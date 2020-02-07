@@ -115,13 +115,7 @@ class ScanBarcodeActivity : AppCompatActivity(), View.OnClickListener {
                 WorkflowModel.WorkflowState.DETECTING -> {
                     startCameraPreview()
                 }
-                WorkflowModel.WorkflowState.CONFIRMING -> {
-                    startCameraPreview()
-                }
-                WorkflowModel.WorkflowState.SEARCHING -> {
-                    stopCameraPreview()
-                }
-                WorkflowModel.WorkflowState.DETECTED, WorkflowModel.WorkflowState.SEARCHED -> {
+                WorkflowModel.WorkflowState.DETECTED -> {
                     stopCameraPreview()
                 }
             }

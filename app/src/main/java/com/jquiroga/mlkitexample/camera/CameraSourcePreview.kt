@@ -68,24 +68,24 @@ class CameraSourcePreview(context: Context, attrs: AttributeSet) : FrameLayout(c
 
         val previewSizeRatio = cameraPreviewSize?.let { size ->
             if (Utils.isPortraitMode(context)) {
-                // Camera's natural orientation is landscape, so need to swap width and height.
+                // La orientación natural de la cámara es horizontal, por lo que es necesario cambiar el ancho y la altura.
                 size.height.toFloat() / size.width
             } else {
                 size.width.toFloat() / size.height
             }
         } ?: layoutWidth.toFloat() / layoutHeight.toFloat()
 
-        // Match the width of the child view to its parent.
+        // Haga coincidir el ancho de la vista secundaria con su padre.
         val childHeight = (layoutWidth / previewSizeRatio).toInt()
         if (childHeight <= layoutHeight) {
             for (i in 0 until childCount) {
                 getChildAt(i).layout(0, 0, layoutWidth, childHeight)
             }
         } else {
-            // When the child view is too tall to be fitted in its parent: If the child view is
-            // static overlay view container (contains views such as bottom prompt chip), we apply
-            // the size of the parent view to it. Otherwise, we offset the top/bottom position
-            // equally to position it in the center of the parent.
+            // Cuando la vista secundaria es demasiado alta para ajustarse a su elemento primario: Si la vista
+            // secundaria es un contenedor de vista de superposición estática (contiene vistas como el chip de
+            // solicitud inferior), le aplicamos el tamaño de la vista primaria. De lo contrario, compensamos
+            // la posición superior / inferior por igual para colocarla en el centro del padre.
             val excessLenInHalf = (childHeight - layoutHeight) / 2
             for (i in 0 until childCount) {
                 val childView = getChildAt(i)

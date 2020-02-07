@@ -31,7 +31,7 @@ internal class BarcodeLoadingGraphic(overlay: GraphicOverlay, private val loadin
 
         val boxPerimeter = (boxRect.width() + boxRect.height()) * 2
         val path = Path()
-        // The distance between the box's left-top corner and the starting point of white colored path.
+        // La distancia entre la esquina superior izquierda de la caja y el punto de inicio de la ruta de color blanco.
         var offsetLen = boxPerimeter * loadingAnimator.animatedValue as Float % boxPerimeter
         var i = 0
         while (i < 4) {
@@ -47,12 +47,12 @@ internal class BarcodeLoadingGraphic(overlay: GraphicOverlay, private val loadin
             i++
         }
 
-        // Computes the path based on the determined starting point and path length.
+        // Calcula la ruta en función del punto de inicio y la longitud de ruta determinados.
         var pathLen = boxPerimeter * 0.3f
         for (j in 0..3) {
             val index = (i + j) % 4
             val nextIndex = (i + j + 1) % 4
-            // The length between path's current end point and reticle box's next coordinate point.
+            // La longitud entre el punto final actual de la ruta y el siguiente punto de coordenadas del cuadro de retícula.
             val lineLen = Math.abs(boxClockwiseCoordinates[nextIndex].x - lastPathPoint.x) +
                     Math.abs(boxClockwiseCoordinates[nextIndex].y - lastPathPoint.y)
             if (lineLen >= pathLen) {

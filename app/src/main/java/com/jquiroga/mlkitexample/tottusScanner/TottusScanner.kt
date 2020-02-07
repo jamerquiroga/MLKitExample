@@ -1,6 +1,7 @@
 package com.jquiroga.mlkitexample.tottusScanner
 
 import android.content.Context
+import android.hardware.Camera
 import android.util.AttributeSet
 import android.util.Log
 import android.widget.FrameLayout
@@ -20,8 +21,7 @@ class TottusScanner(context: Context, attrs: AttributeSet?) : FrameLayout(contex
 
     private var mWorkflowModel: WorkflowModel? = null
     private var mCameraSource: CameraSource? = null
-
-    private lateinit var mCurrentWorkflowState: WorkflowModel.WorkflowState
+    private var mBarcodeProcessor: BarcodeProcessor? = null
 
     init {
         inflate(context, R.layout.view_tottus_scanner, this)
@@ -30,32 +30,35 @@ class TottusScanner(context: Context, attrs: AttributeSet?) : FrameLayout(contex
 
     private fun initUI() {
         mCameraSource = CameraSource(camera_preview_graphic_overlay)
+
+        imbFlashButton.setOnClickListener {
+
+            if (it.isSelected) {
+                it.isSelected = false
+                mCameraSource?.updateFlashMode(Camera.Parameters.FLASH_MODE_OFF)
+            } else {
+                it.isSelected = true
+                mCameraSource?.updateFlashMode(Camera.Parameters.FLASH_MODE_TORCH)
+            }
+        }
+
     }
 
     fun setWorkFlowModel(pWorkflowModel: WorkflowModel) {
         mWorkflowModel = pWorkflowModel
     }
 
-    fun setCurrentWorkFlowState(pCurrentWorkflowState: WorkflowModel.WorkflowState) {
-        mCurrentWorkflowState = pCurrentWorkflowState
-    }
-
     fun onResumeScanner() {
+
         if (mWorkflowModel != null && mCameraSource != null) {
             mWorkflowModel!!.markCameraFrozen()
-            mCurrentWorkflowState = WorkflowModel.WorkflowState.NOT_STARTED
-            mWorkflowModel!!.setWorkflowState(WorkflowModel.WorkflowState.DETECTING)
-            mCameraSource!!.setFrameProcessor(
-                BarcodeProcessor(
-                    camera_preview_graphic_overlay,
-                    mWorkflowModel!!
-                )
-            )
+            mBarcodeProcessor = BarcodeProcessor(camera_preview_graphic_overlay, mWorkflowModel!!)
+            mCameraSource!!.setFrameProcessor(mBarcodeProcessor!!)
+            starCameraPreview()
         }
     }
 
     fun onPauseScanner() {
-        mCurrentWorkflowState = WorkflowModel.WorkflowState.NOT_STARTED
         stopCameraPreview()
     }
 
@@ -64,8 +67,7 @@ class TottusScanner(context: Context, attrs: AttributeSet?) : FrameLayout(contex
         mCameraSource = null
     }
 
-    fun starCameraPreview() {
-
+    private fun starCameraPreview() {
         when {
             mWorkflowModel != null && mCameraSource != null ->
 
@@ -83,17 +85,15 @@ class TottusScanner(context: Context, attrs: AttributeSet?) : FrameLayout(contex
         }
     }
 
-    fun stopCameraPreview() {
+    private fun stopCameraPreview() {
+
         mWorkflowModel?.let {
             if (it.isCameraLive) {
                 it.markCameraFrozen()
                 camera_preview.stop()
+                imbFlashButton.isSelected = false
             }
         }
-    }
-
-    fun getCurrentWorkFlowState(): WorkflowModel.WorkflowState {
-        return mCurrentWorkflowState
     }
 
 }

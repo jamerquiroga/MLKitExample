@@ -2,10 +2,10 @@ package com.jquiroga.mlkitexample.features
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.google.common.base.Objects
 import com.jquiroga.mlkitexample.R
 import com.jquiroga.mlkitexample.camera.WorkflowModel
 import kotlinx.android.synthetic.main.activity_scan_barcode2.*
@@ -26,7 +26,7 @@ class ScanBarcode2Activity : AppCompatActivity() {
     }
 
     private fun initObservers(){
-        mWorkflowModel.workflowState.observe(this, Observer { workflowState ->
+        /*mWorkflowModel.workflowState.observe(this, Observer { workflowState ->
 
             if (workflowState == null || Objects.equal(scnTottusScanner.getCurrentWorkFlowState(), workflowState)) {
                 return@Observer
@@ -38,18 +38,20 @@ class ScanBarcode2Activity : AppCompatActivity() {
                 WorkflowModel.WorkflowState.DETECTING -> {
                     scnTottusScanner.starCameraPreview()
                 }
-                WorkflowModel.WorkflowState.CONFIRMING -> {
-                    scnTottusScanner.starCameraPreview()
-                }
-                WorkflowModel.WorkflowState.SEARCHING -> {
-                    scnTottusScanner.stopCameraPreview()
-                }
-                WorkflowModel.WorkflowState.DETECTED, WorkflowModel.WorkflowState.SEARCHED -> {
-                    scnTottusScanner.stopCameraPreview()
+                WorkflowModel.WorkflowState.DETECTED -> {
+
+                    scnTottusScanner.disableScanner()
+
+                    val handler = Handler()
+
+                    val runnable = Runnable {
+                        scnTottusScanner.enableScanner()
+                    }
+                    handler.postDelayed(runnable, 2000)
+
                 }
             }
-
-        })
+        })*/
 
         mWorkflowModel.detectedBarcode.observe(this, Observer { barcode ->
             barcode?.let {
@@ -62,15 +64,18 @@ class ScanBarcode2Activity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         scnTottusScanner.onResumeScanner()
+        Log.d("998837", "onResume")
     }
 
     override fun onPause() {
         super.onPause()
         scnTottusScanner.onPauseScanner()
+        Log.d("998837", "onPause")
     }
 
     override fun onDestroy() {
         super.onDestroy()
         scnTottusScanner.onDestroyScanner()
+        Log.d("998837", "onDestroy")
     }
 }
