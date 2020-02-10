@@ -26,32 +26,6 @@ class ScanBarcode2Activity : AppCompatActivity() {
     }
 
     private fun initObservers(){
-        /*mWorkflowModel.workflowState.observe(this, Observer { workflowState ->
-
-            if (workflowState == null || Objects.equal(scnTottusScanner.getCurrentWorkFlowState(), workflowState)) {
-                return@Observer
-            }
-
-            scnTottusScanner.setCurrentWorkFlowState(workflowState)
-
-            when(workflowState){
-                WorkflowModel.WorkflowState.DETECTING -> {
-                    scnTottusScanner.starCameraPreview()
-                }
-                WorkflowModel.WorkflowState.DETECTED -> {
-
-                    scnTottusScanner.disableScanner()
-
-                    val handler = Handler()
-
-                    val runnable = Runnable {
-                        scnTottusScanner.enableScanner()
-                    }
-                    handler.postDelayed(runnable, 2000)
-
-                }
-            }
-        })*/
 
         mWorkflowModel.detectedBarcode.observe(this, Observer { barcode ->
             barcode?.let {

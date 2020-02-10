@@ -12,16 +12,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:text="@string/escanear_codigo_de_barras"
-        app:layout_constraintBottom_toTopOf="@+id/btnRecognizeText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/btnRecognizeText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:text="@string/reconocer_texto"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

@@ -1,9 +1,7 @@
 package com.jquiroga.mlkitexample.barcodedetection
 
-import android.animation.ValueAnimator
 import android.media.AudioManager
 import android.media.ToneGenerator
-import android.os.Handler
 import android.util.Log
 import androidx.annotation.MainThread
 import com.google.android.gms.tasks.Task

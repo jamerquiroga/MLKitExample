@@ -1,27 +1,11 @@
-/*
- * Copyright 2019 Google LLC
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.jquiroga.mlkitexample.settings
 
 import android.content.Context
 import android.graphics.RectF
 import android.preference.PreferenceManager
+import android.util.Log
 import androidx.annotation.StringRes
 import com.google.android.gms.common.images.Size
-import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcode
 import com.jquiroga.mlkitexample.R
 import com.jquiroga.mlkitexample.camera.CameraSizePair
 import com.jquiroga.mlkitexample.camera.GraphicOverlay
@@ -36,21 +20,6 @@ object PreferenceUtils {
                 .apply()
     }
 
-    fun getProgressToMeetBarcodeSizeRequirement(
-        overlay: GraphicOverlay,
-        barcode: FirebaseVisionBarcode
-    ): Float {
-        val context = overlay.context
-        return if (getBooleanPref(context, R.string.pref_key_enable_barcode_size_check, false)) {
-            val reticleBoxWidth = getBarcodeReticleBox(overlay).width()
-            val barcodeWidth = overlay.translateX(barcode.boundingBox?.width()?.toFloat() ?: 0f)
-            val requiredWidth = reticleBoxWidth * getIntPref(context, R.string.pref_key_minimum_barcode_width, 50) / 100
-            (barcodeWidth / requiredWidth).coerceAtMost(1f)
-        } else {
-            1f
-        }
-    }
-
     fun getBarcodeReticleBox(overlay: GraphicOverlay): RectF {
         val context = overlay.context
         val overlayWidth = overlay.width.toFloat()
@@ -61,9 +30,6 @@ object PreferenceUtils {
         val cy = overlayHeight / 2
         return RectF(cx - boxWidth / 2, cy - boxHeight / 2, cx + boxWidth / 2, cy + boxHeight / 2)
     }
-
-    fun shouldDelayLoadingBarcodeResult(context: Context): Boolean =
-        getBooleanPref(context, R.string.pref_key_delay_loading_barcode_result, true)
 
     private fun getIntPref(context: Context, @StringRes prefKeyId: Int, defaultValue: Int): Int {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
@@ -76,6 +42,10 @@ object PreferenceUtils {
             val previewSizePrefKey = context.getString(R.string.pref_key_rear_camera_preview_size)
             val pictureSizePrefKey = context.getString(R.string.pref_key_rear_camera_picture_size)
             val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+
+            Log.d("PreferenceUtils", "Preview size: ${sharedPreferences.getString(previewSizePrefKey, null)}")
+            Log.d("PreferenceUtils", "Picture size: ${sharedPreferences.getString(previewSizePrefKey, null)}")
+
             CameraSizePair(
                     Size.parseSize(sharedPreferences.getString(previewSizePrefKey, null)),
                     Size.parseSize(sharedPreferences.getString(pictureSizePrefKey, null)))
@@ -83,7 +53,4 @@ object PreferenceUtils {
             null
         }
     }
-
-    private fun getBooleanPref(context: Context, @StringRes prefKeyId: Int, defaultValue: Boolean): Boolean =
-        PreferenceManager.getDefaultSharedPreferences(context).getBoolean(context.getString(prefKeyId), defaultValue)
 }

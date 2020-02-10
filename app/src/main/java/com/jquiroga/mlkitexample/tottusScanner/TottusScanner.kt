@@ -16,7 +16,7 @@ import java.io.IOException
 class TottusScanner(context: Context, attrs: AttributeSet?) : FrameLayout(context, attrs) {
 
     companion object {
-        private const val TAG = "TottusScanner"
+        private val TAG = TottusScanner::class.java.simpleName
     }
 
     private var mWorkflowModel: WorkflowModel? = null

@@ -226,6 +226,7 @@ class CameraSource(private val graphicOverlay: GraphicOverlay) {
         sizePair.picture?.let { pictureSize ->
             Log.v(TAG, "Camera picture size: $pictureSize")
             parameters.setPictureSize(pictureSize.width, pictureSize.height)
+            Log.d(TAG, "Picture size: $pictureSize width: ${pictureSize.width} heigth: ${pictureSize.height}")
             PreferenceUtils.saveStringPreference(
                     context, R.string.pref_key_rear_camera_picture_size, pictureSize.toString())
         }

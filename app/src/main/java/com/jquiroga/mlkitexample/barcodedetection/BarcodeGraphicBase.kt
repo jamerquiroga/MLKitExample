@@ -2,8 +2,6 @@
 package com.jquiroga.mlkitexample.barcodedetection
 
 import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.CornerPathEffect
 import android.graphics.Paint
 import android.graphics.Paint.Style
 import android.graphics.PorterDuff
@@ -33,13 +31,6 @@ internal abstract class BarcodeGraphicBase(overlay: GraphicOverlay) : GraphicOve
 
     val boxCornerRadius: Float =
         context.resources.getDimensionPixelOffset(R.dimen.barcode_reticle_corner_radius).toFloat()
-
-    val pathPaint: Paint = Paint().apply {
-        color = Color.WHITE
-        style = Style.STROKE
-        strokeWidth = boxPaint.strokeWidth
-        pathEffect = CornerPathEffect(boxCornerRadius)
-    }
 
     val boxRect: RectF = PreferenceUtils.getBarcodeReticleBox(overlay)
 
